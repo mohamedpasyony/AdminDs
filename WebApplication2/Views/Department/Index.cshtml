@@ -1,0 +1,118 @@
+﻿@model IQueryable<WebApplication2.Models.DepartmentVM>
+
+
+@using Microsoft.Extensions.Localization
+@using WebApplication2.Resource.Departments
+@inject IStringLocalizer<SharedResource> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Title"];
+    var Culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+}
+
+@if (Culture == "ar-EG")
+{
+    <h3 style="text-align:left; font-size:25px">
+        <a asp-controller="Department" asp-action="Index" asp-route-culture="en-US">@SharedLocalizer["English"]</a>
+    </h3>
+}
+
+@if (Culture == "en-US")
+{
+    <h3 style="text-align:right; font-size:25px">
+        <a asp-controller="Department" asp-action="Index" asp-route-culture="ar-EG">@SharedLocalizer["Arabic"]</a>
+
+    </h3>
+}
+
+
+
+<h1 class="text-center">@SharedLocalizer["WTE"]</h1>
+<table class="table table-striped table-bordered text-center">
+</table>
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <a asp-controller="Department" asp-action="Create" class="btn btn-primary"> @SharedLocalizer["AddDepartment"]</a>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another action</a></li>
+                                <li><a href="javascript:void(0);">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover text-center js-basic-example dataTable">
+                            <thead>
+                                <tr>
+                                    @*<th class="text-center">id</th>*@
+                                    <th class="text-center"> @SharedLocalizer["DepartmentName"]</th>
+                                    <th class="text-center"> @SharedLocalizer["DepatmentCode"]</th>
+                                    <th class="text-center"> @SharedLocalizer["Edit"] </th>
+                                    <th class="text-center"> @SharedLocalizer["Delete"] </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @*<td>@item.id</td>*@
+                                        <td>@item.DepartmentName</td>
+                                        <td>@item.DepartmentCode</td>
+                                        <td><a asp-controller="Department" asp-action="Edit" asp-route-id="@item.id" class="btn btn-success"> @SharedLocalizer["Edit"]</a></td>
+                                        <td><a asp-controller="Department" asp-action="delete" asp-route-id="@item.id" class="btn btn-danger"> @SharedLocalizer["Delete"]</a></td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Datatablesection{
+    <script>
+        $(function () {
+            $('.js-basic-example').DataTable({
+                responsive: true,
+                paging: true,
+                pageLength: 3,
+                bSort: true,
+                bFilter: true,
+                bLengthChange: true,
+                bInfo: false,
+                lengthMenu: [[3, 10, 25, 50, -1], [3, 10, 25, 50, "All"]]
+
+            });
+        });
+
+    </script>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

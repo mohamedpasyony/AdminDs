@@ -1,0 +1,63 @@
+﻿@model WebApplication2.Models.EmployeeVM;
+
+@{
+    ViewBag.Title = "Edit";
+}
+   <h1>Editig On Selected Employee</h1>
+   <form asp-controller="Employee" asp-action="Edit" method="post" class="form-group">
+       <label>Name</label>
+       <input type="text" asp-for="Name" class="form-control" />
+       <span class="text-danger" asp-validation-for="Name"></span>
+       <br />
+       <label>Salary</label>
+       <input type="text" asp-for="Salary" class="form-control" />
+       <span class="text-danger" asp-validation-for="Salary"></span>
+       <br />
+       <label>Address</label>
+       <input type="text" asp-for="Aderess" class="form-control" />
+       <span class="text-danger" asp-validation-for="Aderess"></span>
+       <br />
+       <label>Email</label>
+       <input type="text" asp-for="Email" class="form-control" />
+       <span class="text-danger" asp-validation-for="Email"></span>
+       <br />
+
+       <label>IsActive</label>
+       <input type="text" asp-for="IsActive" class="form-control" />
+       <span class="text-danger" asp-validation-for="IsActive"></span>
+       <br />
+       <label>HireDate</label>
+       <input type="date" asp-for="HireDate" class="form-control" />
+       <span class="text-danger" asp-validation-for="HireDate"></span>
+       <br />
+       <label>DepartmentName</label>
+       <select asp-for="Departmentid" asp-items="@(SelectList)ViewBag.DepartmentList" class="form-control">
+           @*<option value="">@Model.Departmentid</option>*@
+
+       </select>
+
+       <span class="text-danger" asp-validation-for="Departmentid"></span>
+
+       <br />
+       <label>DistrictName</label>
+       <select asp-for="DistrictId" asp-items="@(SelectList)ViewBag.DistrictList" class="form-control">
+           @*<option value="">@Model.DistrictId</option>*@
+       </select>
+       <span class="text-danger" asp-validation-for="DistrictId"></span>
+       <br />
+       <label>Notes</label>
+       <textarea type="text" asp-for="Notes" rows="4" class="form-control"></textarea>
+       <span class="text-danger" asp-validation-for="Notes"></span>
+       <br />
+
+       <div class="row text-center">
+           <input type="submit" value="Edit" class="btn btn-success " />
+           <input asp-controller="Employee" asp-action="Index" type="submit" value="Return" class="btn btn-primary " />
+
+       </div>
+   </form>
+<link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
